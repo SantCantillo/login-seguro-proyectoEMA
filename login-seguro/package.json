@@ -1,7 +1,7 @@
 {
   "name": "login-seguro",
   "version": "1.0.0",
-  "description": "Proyecto de login seguro con Node.js y Express",
+  "description": "Login seguro con Node.js, Express, sesiones y bcrypt (deploy en Render).",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
