@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Seguro</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <form id="login-form" autocomplete="off" novalidate>
+    <img src="img/user.png" alt="user" onerror="this.style.display='none'"/>
+
+    <label for="username">Usuario</label>
+    <input id="username" name="username" type="text"
+           placeholder="Nombre de usuario" autocomplete="username" required />
+
+    <label for="password">Contraseña</label>
+    <input id="password" name="password" type="password"
+           placeholder="••••••••" minlength="8" autocomplete="current-password" required />
+
+    <div class="box-visible">
+      <input type="checkbox" id="visible" />
+      <label for="visible">Mostrar contraseña</label>
+    </div>
+
+    <p id="error" class="error" style="display:none;" aria-live="polite"></p>
+
+    <button type="submit">Iniciar sesión</button>
+    <p id="loading-msg" style="display:none; text-align:center; font-size:.85rem; color:#555; margin:6px 0 0;">
+      Sesión iniciada, redirigiendo…
+    </p>
+  </form>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

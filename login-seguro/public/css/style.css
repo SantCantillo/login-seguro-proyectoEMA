@@ -1,0 +1,138 @@
+/* ===== Login UI Pro (drop-in) ===== */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+/* Design tokens */
+:root{
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --primary:#3b5bfd;
+  --primary-600:#2f4ae6;
+  --ring:#9bb1ff;
+  --error:#b00020;
+  --radius:16px;
+  --shadow:0 10px 25px rgba(0,0,0,.07);
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0b1020;
+    --card:#0f1528;
+    --text:#e5e7eb;
+    --muted:#94a3b8;
+    --primary:#5a76ff;
+    --primary-600:#4c64f0;
+    --ring:#6f8cff;
+    --shadow:0 12px 38px rgba(0,0,0,.35);
+  }
+}
+
+/* Reset + base */
+*{ box-sizing:border-box; }
+*{ font-family: Inter, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+html,body{height:100%}
+body{
+  margin:0;
+  display:grid; place-items:center; min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(59,91,253,.08), transparent 60%),
+    radial-gradient(900px 500px at -10% 90%, rgba(59,91,253,.06), transparent 60%),
+    var(--bg);
+}
+
+/* Card (tu <form>) */
+form{
+  width:min(420px, 92vw);
+  background:var(--card);
+  padding:26px;
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  display:grid; gap:12px; text-align:left;
+  border:1px solid rgba(17,24,39,.06);
+  animation:pop .35s ease;
+}
+@keyframes pop{from{transform:translateY(6px);opacity:0}to{transform:none;opacity:1}}
+
+/* Avatar */
+form img{
+  width:78px; height:78px; margin:2px auto 10px; display:block;
+  opacity:.95; border-radius:50%;
+  background:linear-gradient(145deg, rgba(59,91,253,.15), rgba(59,91,253,.05));
+  padding:10px; object-fit:cover;
+}
+
+/* Labels e inputs */
+label{ font-weight:600; font-size:13.5px; color:var(--muted); margin-left:2px; }
+
+input[type="text"],
+input[type="password"]{
+  padding:12px 14px;
+  border:1.2px solid rgba(100,116,139,.35);
+  border-radius:12px;
+  outline:none; background:#fff0; color:inherit;
+  transition:border .15s, box-shadow .15s, background .15s;
+}
+input::placeholder{ color:#9aa4b2; }
+
+input:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 4px color-mix(in oklab, var(--ring) 28%, transparent);
+  background:rgba(59,91,253,.03);
+}
+
+/* Estado de error accesible (si tu JS agrega aria-invalid="true") */
+input[aria-invalid="true"]{
+  border-color:var(--error);
+  box-shadow:0 0 0 4px color-mix(in oklab, var(--error) 20%, transparent);
+}
+
+/* Checkbox “Mostrar contraseña” */
+.box-visible{
+  display:flex; align-items:center; gap:8px; margin-top:2px;
+  font-size:12.5px; color:var(--muted);
+}
+.box-visible input{ width:16px; height:16px; }
+.box-visible input:focus-visible{
+  outline:2px solid var(--ring); outline-offset:2px;
+}
+
+/* Mensajes */
+.error{
+  background:color-mix(in oklab, var(--error) 10%, transparent);
+  border:1px solid var(--error);
+  color:var(--error);
+  font-size:.92rem;
+  padding:8px 10px; border-radius:10px; margin:4px 0 2px;
+}
+
+/* Botón */
+button{
+  margin-top:6px; padding:12px 14px; border:0; border-radius:12px;
+  background:var(--primary); color:#fff; font-weight:600; cursor:pointer;
+  transition:transform .06s ease, box-shadow .15s ease, background .15s ease, opacity .2s ease;
+  box-shadow:0 6px 18px rgba(59,91,253,.25);
+}
+button:hover{ background:var(--primary-600); }
+button:active{ transform:translateY(1px); }
+button:disabled{ opacity:.7; cursor:not-allowed; box-shadow:none; }
+
+/* Spinner integrado al botón cuando [data-loading="true"] */
+button[data-loading="true"]{ position:relative; }
+button[data-loading="true"]::after{
+  content:""; position:absolute; right:14px; top:50%;
+  width:16px; height:16px; border:2px solid currentColor; border-right-color:transparent;
+  border-radius:50%; transform:translateY(-50%); animation:spin .8s linear infinite;
+}
+@keyframes spin{ to{ transform:translateY(-50%) rotate(360deg); } }
+
+/* Mensaje de redirección */
+#loading-msg{ animation:fadeIn .25s ease forwards; color:var(--muted); text-align:center; }
+@keyframes fadeIn{ from{opacity:0} to{opacity:1} }
+
+/* Respeta preferencias de movimiento */
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition:none !important; }
+}
